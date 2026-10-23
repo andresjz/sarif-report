@@ -16,6 +16,25 @@ others. [Qlty](https://qlty.sh) is just one example of a SARIF producer: it can
 aggregate several linters into a single SARIF file, which is a convenient input,
 but it is in no way required.
 
+### Qlty-aggregated SARIF
+
+Qlty emits a **single `run`** whose `tool.driver.name` is `"qlty"` and encodes
+the real linter as the **first segment of each `ruleId`**, using the form
+`"<linter>:<rule...>"` (e.g. `markdownlint:MD013`, `yamllint:line-length`,
+`zizmor:zizmor/template-injection`, `radarlint-iac:docker:S7031`). `sarif-report`
+unpacks this automatically:
+
+* The **tool** is the first `:`-segment of the `ruleId` (so
+  `radarlint-iac:docker:S7031` → tool `radarlint-iac`), never the `qlty`
+  wrapper. The `tools` breakdown therefore lists `markdownlint`, `yamllint`,
+  `prettier`, `zizmor`, … instead of a single `qlty` bucket.
+* The **canonical rule id is the raw `ruleId` as-is** — it is *not* re-prefixed
+  with `driver.name`, so catalog keys like `markdownlint:MD013` match (no
+  `qlty:markdownlint:MD013` duplication).
+* A classic per-tool SARIF (where `driver.name` is the real tool and the
+  `ruleId` carries no `:`) keeps the legacy behavior: tool = `driver.name`,
+  canonical id = `"<driver.name>:<ruleId>"`.
+
 ## Quick start (no install, via `uvx`)
 
 ```bash

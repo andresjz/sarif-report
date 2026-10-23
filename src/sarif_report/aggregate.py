@@ -30,7 +30,15 @@ _CODE_TO_ID = {0: "error", 1: "warning", 2: "note"}
 # Tools whose findings are surfaced in the dedicated "security" section.
 # Grouped dynamically: any tool listed here that actually appears in the SARIF
 # gets its own key in ``security``.
-_SECURITY_TOOLS = ("osv-scanner", "zizmor", "bandit", "trivy", "semgrep", "gitleaks")
+_SECURITY_TOOLS = (
+    "osv-scanner",
+    "zizmor",
+    "bandit",
+    "trivy",
+    "semgrep",
+    "gitleaks",
+    "trufflehog",
+)
 
 
 def _level_code(result: Dict[str, Any], rule_defaults: Dict[str, int], rule_id: str) -> int:
@@ -44,9 +52,37 @@ def _level_code(result: Dict[str, Any], rule_defaults: Dict[str, int], rule_id: 
     return _LEVEL_TO_CODE.get(str(level).lower(), 1)
 
 
-def _tool_name(run: Dict[str, Any]) -> str:
+def _driver_name(run: Dict[str, Any]) -> str:
     driver = (run.get("tool") or {}).get("driver") or {}
     return str(driver.get("name") or "unknown")
+
+
+def _derive_tool_and_rule(raw_rule_id: str, driver_name: str) -> Tuple[str, str]:
+    """Derive ``(tool, canonical_rule_id)`` from a raw SARIF ruleId.
+
+    Handles the Qlty convention, where a single run reports ``driver.name ==
+    "qlty"`` and the real linter is embedded as the first segment of the
+    ``ruleId`` (``"<linter>:<rule...>"``), as well as classic per-tool SARIF
+    where ``driver.name`` is the tool and the ``ruleId`` carries no prefix.
+
+    Rules:
+      * If the raw ruleId contains ``:`` -> the tool is the **first segment**
+        before the first ``:`` (so ``radarlint-iac:docker:S7031`` -> tool
+        ``radarlint-iac``) and the canonical rule id is the raw ruleId left
+        **exactly as-is** (never re-prefixed with ``driver.name``).
+      * Otherwise -> fall back to the legacy behavior: tool = ``driver.name``
+        (or ``"unknown"``) and canonical id = ``"<driver.name>:<ruleId>"``.
+      * Defensive special case: a ``driver.name`` of exactly ``"qlty"`` is
+        never used as a tool or prefix. Qlty always prefixes its ruleIds, so
+        the ``:`` branch handles it; if a ``qlty`` run ever lacks a prefix we
+        fall back to ``"unknown"`` instead of ``"qlty"``.
+    """
+    if ":" in raw_rule_id:
+        tool = raw_rule_id.split(":", 1)[0] or "unknown"
+        return tool, raw_rule_id
+    # No prefix: legacy per-tool SARIF. Never attribute to the "qlty" wrapper.
+    tool = driver_name if driver_name and driver_name != "qlty" else "unknown"
+    return tool, f"{tool}:{raw_rule_id}"
 
 
 def _rule_default_levels(run: Dict[str, Any]) -> Dict[str, int]:
@@ -111,13 +147,6 @@ def _result_location(result: Dict[str, Any]) -> Tuple[Optional[str], int]:
     return None, -1
 
 
-def _qualified_rule_id(tool: str, rule_id: str) -> str:
-    """Build the "tool:rule" composite id used throughout D."""
-    if rule_id.startswith(tool + ":"):
-        return rule_id
-    return f"{tool}:{rule_id}"
-
-
 def aggregate(
     sarif: Dict[str, Any],
     config: Optional[Dict[str, Any]] = None,
@@ -135,19 +164,23 @@ def aggregate(
     sarif_descs: Dict[str, str] = {}
 
     for run in sarif.get("runs") or []:
-        tool = _tool_name(run)
+        driver_name = _driver_name(run)
         defaults = _rule_default_levels(run)
-        for qid, text in _rule_descriptions(run).items():
-            sarif_descs.setdefault(_qualified_rule_id(tool, qid), text)
+        descs_by_raw = _rule_descriptions(run)
+        for raw_rid, text in descs_by_raw.items():
+            _tool, qid = _derive_tool_and_rule(raw_rid, driver_name)
+            sarif_descs.setdefault(qid, text)
         for result in run.get("results") or []:
             rule_id = result.get("ruleId")
             if rule_id is None:
                 rule_id = "unknown"
             rule_id = str(rule_id)
+            # Severity defaults are keyed by the raw ruleId as it appears in the
+            # driver's rule definitions (Qlty keeps the full prefixed id there).
             sev = _level_code(result, defaults, rule_id)
             msg = _result_message(result)
             path, line = _result_location(result)
-            qid = _qualified_rule_id(tool, rule_id)
+            tool, qid = _derive_tool_and_rule(rule_id, driver_name)
             raw.append((path, sev, msg, qid, line, tool))
 
     # ---- Severity totals -----------------------------------------------------

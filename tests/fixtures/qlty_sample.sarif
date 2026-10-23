@@ -1,0 +1,252 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "qlty",
+          "rules": [
+            { "id": "markdownlint:fmt" },
+            {
+              "id": "markdownlint:MD013",
+              "shortDescription": { "text": "Line length" },
+              "helpUri": "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#MD013"
+            },
+            {
+              "id": "markdownlint:MD060",
+              "helpUri": "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#MD060"
+            },
+            {
+              "id": "markdownlint:MD032",
+              "helpUri": "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#MD032"
+            },
+            {
+              "id": "markdownlint:MD031",
+              "helpUri": "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#MD031"
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "markdownlint:fmt",
+          "level": "note",
+          "message": { "text": "Incorrect formatting, autoformat by running `qlty fmt`." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": ".claude/skills/pr-review/SKILL.md" },
+                "region": {}
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "prettier:fmt",
+          "level": "note",
+          "message": { "text": "Incorrect formatting, autoformat by running `qlty fmt`." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": ".claude/skills/pr-review/SKILL.md" },
+                "region": {}
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "markdownlint:MD013",
+          "level": "warning",
+          "message": { "text": "Line length" },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": ".claude/skills/pr-review/SKILL.md" },
+                "region": { "startLine": 10, "startColumn": 0, "endLine": 0, "endColumn": 0 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "markdownlint:MD060",
+          "level": "warning",
+          "message": { "text": "Table column style" },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": ".claude/skills/pr-review/SKILL.md" },
+                "region": { "startLine": 20, "startColumn": 0, "endLine": 0, "endColumn": 0 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "markdownlint:MD032",
+          "level": "warning",
+          "message": { "text": "Lists should be surrounded by blank lines" },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": ".claude/skills/pr-review/SKILL.md" },
+                "region": { "startLine": 129, "startColumn": 0, "endLine": 0, "endColumn": 0 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "markdownlint:MD031",
+          "level": "warning",
+          "message": { "text": "Fenced code blocks should be surrounded by blank lines" },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": ".github/instructions/react-components.instructions.md" },
+                "region": { "startLine": 63, "startColumn": 0, "endLine": 0, "endColumn": 0 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "markdownlint:MD041",
+          "level": "warning",
+          "message": { "text": "First line in a file should be a top-level heading" },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": ".github/pull_request_template.md" },
+                "region": { "startLine": 1, "startColumn": 0, "endLine": 0, "endColumn": 0 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "markdownlint:MD022",
+          "level": "warning",
+          "message": { "text": "Headings should be surrounded by blank lines" },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": ".github/pull_request_template.md" },
+                "region": { "startLine": 4, "startColumn": 0, "endLine": 0, "endColumn": 0 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "markdownlint:MD047",
+          "level": "warning",
+          "message": { "text": "Files should end with a single newline character" },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": ".github/pull_request_template.md" },
+                "region": { "startLine": 58, "startColumn": 0, "endLine": 0, "endColumn": 0 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "yamllint:document-start",
+          "level": "warning",
+          "message": { "text": "missing document start \"---\"" },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": ".github/workflows/build.yml" },
+                "region": { "startLine": 1, "startColumn": 1, "endLine": 0, "endColumn": 0 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "yamllint:line-length",
+          "level": "warning",
+          "message": { "text": "line too long (120 > 80 characters)" },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": ".github/workflows/build.yml" },
+                "region": { "startLine": 42, "startColumn": 81, "endLine": 0, "endColumn": 0 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "radarlint-iac:docker:S7031",
+          "level": "warning",
+          "message": { "text": "Add a healthcheck to this Dockerfile stage." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "Dockerfile" },
+                "region": { "startLine": 7, "startColumn": 1, "endLine": 0, "endColumn": 0 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "hadolint:DL3015",
+          "level": "note",
+          "message": { "text": "Avoid additional packages by specifying --no-install-recommends." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "Dockerfile" },
+                "region": { "startLine": 12, "startColumn": 1, "endLine": 0, "endColumn": 0 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "zizmor:zizmor/template-injection",
+          "level": "error",
+          "message": { "text": "Potential template injection via unsanitized GitHub context." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": ".github/workflows/deploy-prod.yml" },
+                "region": { "startLine": 33, "startColumn": 9, "endLine": 0, "endColumn": 0 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "osv-scanner:CVE-2025-9999",
+          "level": "error",
+          "message": { "text": "Package 'left-pad@1.0.0' is vulnerable to 'CVE-2025-9999'." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "package.json" }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tool": {
+        "driver": {
+          "name": "checkstyle",
+          "rules": []
+        }
+      },
+      "results": [
+        {
+          "ruleId": "maxLineLen",
+          "level": "warning",
+          "message": { "text": "Line is longer than 100 characters (found 118)." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "src/main/java/com/acme/App.java" },
+                "region": { "startLine": 4 }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

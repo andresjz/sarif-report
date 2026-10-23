@@ -1,0 +1,15 @@
+{
+  "markdownlint:MD013": {
+    "desc": "Línea de Markdown demasiado larga: ajustar al límite configurado.",
+    "note": "Regla de estilo de markdownlint."
+  },
+  "radarlint-iac:docker:S7031": {
+    "desc": "Falta un HEALTHCHECK en esta etapa del Dockerfile."
+  },
+  "osv-scanner:CVE-2025-9999": {
+    "desc": "Dependencia vulnerable (CVE): actualizar a una versión parcheada."
+  },
+  "zizmor:zizmor/template-injection": {
+    "desc": "Posible inyección de plantilla en workflow de GitHub Actions."
+  }
+}
