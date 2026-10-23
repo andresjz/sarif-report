@@ -1,0 +1,42 @@
+[build-system]
+requires = ["hatchling>=1.18"]
+build-backend = "hatchling.build"
+
+[project]
+name = "qlty-report"
+version = "0.1.0"
+description = "Deterministic HTML quality report generator from Qlty SARIF output"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "andresjz" }]
+keywords = ["sarif", "qlty", "static-analysis", "report", "html"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/andresjz/qlty-report"
+Repository = "https://github.com/andresjz/qlty-report"
+
+[project.scripts]
+qlty-report = "qlty_report.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/qlty_report"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/qlty_report/template.html" = "qlty_report/template.html"
+
+[tool.hatch.build.targets.sdist]
+include = ["src/qlty_report", "README.md", "LICENSE"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

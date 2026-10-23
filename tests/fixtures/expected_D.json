@@ -1,0 +1,347 @@
+{
+  "meta": {
+    "source": "qlty.sarif",
+    "generated": "2026-10-17",
+    "total": 10,
+    "files": 7,
+    "rules": 6
+  },
+  "sev": [
+    {
+      "id": "error",
+      "n": 3
+    },
+    {
+      "id": "warning",
+      "n": 5
+    },
+    {
+      "id": "note",
+      "n": 2
+    }
+  ],
+  "areas": [
+    {
+      "id": 0,
+      "label": "src/main",
+      "t": 2,
+      "e": 0,
+      "w": 1,
+      "n": 1
+    },
+    {
+      "id": 1,
+      "label": "src/test",
+      "t": 1,
+      "e": 0,
+      "w": 1,
+      "n": 0
+    },
+    {
+      "id": 2,
+      "label": ".github (CI)",
+      "t": 1,
+      "e": 0,
+      "w": 0,
+      "n": 1
+    },
+    {
+      "id": 3,
+      "label": "Otros",
+      "t": 6,
+      "e": 3,
+      "w": 3,
+      "n": 0
+    }
+  ],
+  "tools": [
+    {
+      "id": "eslint",
+      "n": 5
+    },
+    {
+      "id": "checkstyle",
+      "n": 3
+    },
+    {
+      "id": "bandit",
+      "n": 1
+    },
+    {
+      "id": "osv-scanner",
+      "n": 1
+    }
+  ],
+  "rules": [
+    {
+      "id": "eslint:no-unused-vars",
+      "tool": "eslint",
+      "t": 3,
+      "e": 0,
+      "w": 3,
+      "n": 0,
+      "desc": "Variable declarada sin uso: eliminarla o usarla.",
+      "ex": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "id": "checkstyle:javadoc.missing",
+      "tool": "checkstyle",
+      "t": 2,
+      "e": 0,
+      "w": 1,
+      "n": 1,
+      "desc": "Falta comentario Javadoc en métodos/constructores (alcance protected+).",
+      "ex": [
+        7
+      ]
+    },
+    {
+      "id": "eslint:eqeqeq",
+      "tool": "eslint",
+      "t": 2,
+      "e": 2,
+      "w": 0,
+      "n": 0,
+      "desc": "Comparación no estricta: usar === y !== en vez de == y !=.",
+      "ex": [
+        4,
+        5
+      ]
+    },
+    {
+      "id": "bandit:B310",
+      "tool": "bandit",
+      "t": 1,
+      "e": 0,
+      "w": 0,
+      "n": 1,
+      "desc": "url.open sin auditar el esquema permitido.",
+      "ex": [
+        3
+      ]
+    },
+    {
+      "id": "checkstyle:maxLineLen",
+      "tool": "checkstyle",
+      "t": 1,
+      "e": 0,
+      "w": 1,
+      "n": 0,
+      "desc": "Línea de más de 100 caracteres.",
+      "ex": [
+        6
+      ]
+    },
+    {
+      "id": "osv-scanner:CVE-2025-0001",
+      "tool": "osv-scanner",
+      "t": 1,
+      "e": 1,
+      "w": 0,
+      "n": 0,
+      "desc": "Dependencia vulnerable (CVE): actualizar a una versión parcheada.",
+      "ex": [
+        8
+      ]
+    }
+  ],
+  "files": [
+    {
+      "p": "src/components/Button.tsx",
+      "a": 3,
+      "t": 2,
+      "e": 0,
+      "w": 2,
+      "n": 0,
+      "top": 0
+    },
+    {
+      "p": "src/main/java/com/acme/App.java",
+      "a": 0,
+      "t": 2,
+      "e": 0,
+      "w": 1,
+      "n": 1,
+      "top": 1
+    },
+    {
+      "p": "src/pages/Home.tsx",
+      "a": 3,
+      "t": 2,
+      "e": 1,
+      "w": 1,
+      "n": 0,
+      "top": 2
+    },
+    {
+      "p": ".github/scripts/deploy.py",
+      "a": 2,
+      "t": 1,
+      "e": 0,
+      "w": 0,
+      "n": 1,
+      "top": 3
+    },
+    {
+      "p": "package.json",
+      "a": 3,
+      "t": 1,
+      "e": 1,
+      "w": 0,
+      "n": 0,
+      "top": 5
+    },
+    {
+      "p": "src/hooks/useAuth.ts",
+      "a": 3,
+      "t": 1,
+      "e": 1,
+      "w": 0,
+      "n": 0,
+      "top": 2
+    },
+    {
+      "p": "src/test/java/com/acme/AppTest.java",
+      "a": 1,
+      "t": 1,
+      "e": 0,
+      "w": 1,
+      "n": 0,
+      "top": 4
+    }
+  ],
+  "msgs": [
+    "'bar' is defined but never used.",
+    "'baz' is defined but never used.",
+    "'foo' is defined but never used.",
+    "Audit url open for permitted schemes.",
+    "Expected '!==' and instead saw '!='.",
+    "Expected '===' and instead saw '=='.",
+    "Line is longer than 100 characters (found 118).",
+    "Missing a Javadoc comment.",
+    "Package 'left-pad@1.0.0' is vulnerable to 'CVE-2025-0001'."
+  ],
+  "findings": [
+    [
+      0,
+      1,
+      2,
+      0,
+      12
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      40
+    ],
+    [
+      2,
+      1,
+      1,
+      0,
+      7
+    ],
+    [
+      1,
+      1,
+      7,
+      1,
+      10
+    ],
+    [
+      1,
+      2,
+      7,
+      1,
+      30
+    ],
+    [
+      2,
+      0,
+      5,
+      2,
+      22
+    ],
+    [
+      5,
+      0,
+      4,
+      2,
+      55
+    ],
+    [
+      3,
+      2,
+      3,
+      3,
+      21
+    ],
+    [
+      6,
+      1,
+      6,
+      4,
+      4
+    ],
+    [
+      4,
+      0,
+      8,
+      5,
+      -1
+    ]
+  ],
+  "security": {
+    "cves": [
+      {
+        "file": "package.json",
+        "line": -1,
+        "sev": 0,
+        "rule": "osv-scanner:CVE-2025-0001",
+        "msg": "Package 'left-pad@1.0.0' is vulnerable to 'CVE-2025-0001'."
+      }
+    ],
+    "bandit": [
+      {
+        "file": ".github/scripts/deploy.py",
+        "line": 21,
+        "sev": 2,
+        "rule": "bandit:B310",
+        "msg": "Audit url open for permitted schemes."
+      }
+    ]
+  },
+  "waves": [
+    {
+      "id": "w1",
+      "label": "Seguridad y CI",
+      "t": 0,
+      "note": "CVEs en dependencias y hallazgos de escáneres de seguridad. Único bloque con riesgo real de exploit.",
+      "rules": [
+        5,
+        3
+      ],
+      "tool": [
+        "osv-scanner",
+        "bandit"
+      ]
+    },
+    {
+      "id": "w2",
+      "label": "Limpieza mecánica",
+      "t": 0,
+      "note": "Hallazgos de bajo riesgo que se corrigen de forma mecánica.",
+      "rules": [
+        1,
+        4
+      ],
+      "tool": null
+    }
+  ]
+}

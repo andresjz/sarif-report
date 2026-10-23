@@ -1,0 +1,29 @@
+{
+  "title": "UTEM-API Quality Report",
+  "brand": "UTEM-API Quality Report",
+  "source_label": "qlty.sarif",
+  "generated": "2026-10-17",
+  "areas": [
+    {"label": "src/main", "match": ["src/main/"]},
+    {"label": "src/test", "match": ["src/test/"]},
+    {"label": ".github (CI)", "match": [".github/"]},
+    {"label": "Build", "match": ["Dockerfile", "pom.xml", "scripts/"]},
+    {"label": "Otros", "match": ["*"]}
+  ],
+  "waves": [
+    {
+      "id": "w1",
+      "label": "Seguridad y CI",
+      "note": "CVEs en dependencias y hallazgos de escáneres de seguridad. Único bloque con riesgo real de exploit.",
+      "rules": ["osv-scanner:CVE-2025-0001", "bandit:B310"],
+      "tool": ["osv-scanner", "bandit"]
+    },
+    {
+      "id": "w2",
+      "label": "Limpieza mecánica",
+      "note": "Hallazgos de bajo riesgo que se corrigen de forma mecánica.",
+      "rules": ["checkstyle:javadoc.missing", "checkstyle:maxLineLen"],
+      "tool": null
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "title": "UTEM-UI Quality Report",
+  "brand": "UTEM-UI Quality Report",
+  "source_label": "qlty.sarif",
+  "generated": "2026-10-17",
+  "areas": [
+    {"label": "src/pages", "match": ["src/pages/"]},
+    {"label": "src/components", "match": ["src/components/"]},
+    {"label": "src/hooks", "match": ["src/hooks/"]},
+    {"label": "src/stores", "match": ["src/stores/"]},
+    {"label": "src/utils", "match": ["src/utils/"]},
+    {"label": ".github (CI)", "match": [".github/"]},
+    {"label": "Build", "match": ["Dockerfile", "vite.config", "package.json", "tsconfig"]},
+    {"label": "Otros", "match": ["*"]}
+  ],
+  "waves": []
+}

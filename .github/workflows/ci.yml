@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install package and test deps
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+      - name: Run tests
+        run: python -m pytest -q
+      - name: Determinism check (double run diff)
+        run: |
+          python -m qlty_report --sarif tests/fixtures/sample.sarif \
+            --config examples/api.config.json \
+            --catalog examples/rules-catalog.example.json \
+            --emit-data /tmp/d1.json --out /tmp/r1.html
+          python -m qlty_report --sarif tests/fixtures/sample.sarif \
+            --config examples/api.config.json \
+            --catalog examples/rules-catalog.example.json \
+            --emit-data /tmp/d2.json --out /tmp/r2.html
+          diff /tmp/d1.json /tmp/d2.json
+          diff /tmp/r1.html /tmp/r2.html
+          echo "deterministic: outputs identical"

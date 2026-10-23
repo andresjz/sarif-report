@@ -1,0 +1,184 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "eslint",
+          "rules": [
+            {
+              "id": "no-unused-vars",
+              "shortDescription": { "text": "Disallow unused variables." },
+              "defaultConfiguration": { "level": "warning" }
+            },
+            {
+              "id": "eqeqeq",
+              "fullDescription": { "text": "Require the use of === and !==." },
+              "defaultConfiguration": { "level": "error" }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "no-unused-vars",
+          "level": "warning",
+          "message": { "text": "'foo' is defined but never used." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "src/components/Button.tsx" },
+                "region": { "startLine": 12 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "no-unused-vars",
+          "level": "warning",
+          "message": { "text": "'bar' is defined but never used." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "src/components/Button.tsx" },
+                "region": { "startLine": 40 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "no-unused-vars",
+          "level": "warning",
+          "message": { "text": "'baz' is defined but never used." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "src/pages/Home.tsx" },
+                "region": { "startLine": 7 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "eqeqeq",
+          "level": "error",
+          "message": { "text": "Expected '===' and instead saw '=='." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "src/pages/Home.tsx" },
+                "region": { "startLine": 22 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "eqeqeq",
+          "message": { "text": "Expected '!==' and instead saw '!='." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "src/hooks/useAuth.ts" },
+                "region": { "startLine": 55 }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tool": {
+        "driver": {
+          "name": "checkstyle",
+          "rules": []
+        }
+      },
+      "results": [
+        {
+          "ruleId": "javadoc.missing",
+          "level": "warning",
+          "message": { "text": "Missing a Javadoc comment." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "src/main/java/com/acme/App.java" },
+                "region": { "startLine": 10 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "javadoc.missing",
+          "level": "note",
+          "message": { "text": "Missing a Javadoc comment." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "src/main/java/com/acme/App.java" },
+                "region": { "startLine": 30 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "maxLineLen",
+          "message": { "text": "Line is longer than 100 characters (found 118)." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "src/test/java/com/acme/AppTest.java" },
+                "region": { "startLine": 4 }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tool": {
+        "driver": {
+          "name": "osv-scanner",
+          "rules": []
+        }
+      },
+      "results": [
+        {
+          "ruleId": "CVE-2025-0001",
+          "level": "error",
+          "message": { "text": "Package 'left-pad@1.0.0' is vulnerable to 'CVE-2025-0001'." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "package.json" }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tool": {
+        "driver": {
+          "name": "bandit",
+          "rules": []
+        }
+      },
+      "results": [
+        {
+          "ruleId": "B310",
+          "level": "note",
+          "message": { "text": "Audit url open for permitted schemes." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": ".github/scripts/deploy.py" },
+                "region": { "startLine": 21 }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

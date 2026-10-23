@@ -1,0 +1,21 @@
+{
+  "eslint:no-unused-vars": {
+    "desc": "Variable declarada sin uso: eliminarla o usarla.",
+    "note": "Regla base de calidad en TypeScript/JavaScript."
+  },
+  "eslint:eqeqeq": {
+    "desc": "Comparación no estricta: usar === y !== en vez de == y !=."
+  },
+  "checkstyle:javadoc.missing": {
+    "desc": "Falta comentario Javadoc en métodos/constructores (alcance protected+)."
+  },
+  "checkstyle:maxLineLen": {
+    "desc": "Línea de más de 100 caracteres."
+  },
+  "osv-scanner:CVE-2025-0001": {
+    "desc": "Dependencia vulnerable (CVE): actualizar a una versión parcheada."
+  },
+  "bandit:B310": {
+    "desc": "url.open sin auditar el esquema permitido."
+  }
+}
