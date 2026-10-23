@@ -1,4 +1,4 @@
-"""Enable ``python -m qlty_report``."""
+"""Enable ``python -m sarif_report``."""
 
 from .cli import main
 

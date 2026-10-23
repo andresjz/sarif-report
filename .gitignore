@@ -17,6 +17,7 @@ env/
 .uv/
 
 # Generated reports (don't commit outputs)
+report.html
 qlty-report.html
 *.out.html
 

@@ -1,6 +1,6 @@
 """Path classification tests."""
 
-from qlty_report.areas import classify
+from sarif_report.areas import classify
 
 UI_AREAS = [
     {"label": "src/pages", "match": ["src/pages/"]},

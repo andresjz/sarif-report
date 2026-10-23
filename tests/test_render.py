@@ -4,8 +4,8 @@ import json
 import re
 from pathlib import Path
 
-from qlty_report.aggregate import aggregate
-from qlty_report.render import render, data_to_json
+from sarif_report.aggregate import aggregate
+from sarif_report.render import render, data_to_json
 
 FIX = Path(__file__).parent / "fixtures"
 ROOT = Path(__file__).parent.parent
@@ -28,7 +28,7 @@ def test_html_contains_const_d_and_title():
     assert "const D =" in html
     assert "UTEM-API Quality Report" in html
     # No unresolved placeholders remain.
-    assert "__QLTY_REPORT_" not in html
+    assert "__SARIF_REPORT_" not in html
 
 
 def test_embedded_d_is_valid_json_and_has_correct_total():

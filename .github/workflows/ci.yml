@@ -22,11 +22,11 @@ jobs:
         run: python -m pytest -q
       - name: Determinism check (double run diff)
         run: |
-          python -m qlty_report --sarif tests/fixtures/sample.sarif \
+          python -m sarif_report --sarif tests/fixtures/sample.sarif \
             --config examples/api.config.json \
             --catalog examples/rules-catalog.example.json \
             --emit-data /tmp/d1.json --out /tmp/r1.html
-          python -m qlty_report --sarif tests/fixtures/sample.sarif \
+          python -m sarif_report --sarif tests/fixtures/sample.sarif \
             --config examples/api.config.json \
             --catalog examples/rules-catalog.example.json \
             --emit-data /tmp/d2.json --out /tmp/r2.html

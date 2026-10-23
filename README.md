@@ -1,38 +1,49 @@
-# qlty-report
+# sarif-report
 
-**Deterministic HTML quality report generator from [Qlty](https://qlty.sh) SARIF output.**
+**Deterministic HTML report generator from [SARIF](https://sarifweb.azurewebsites.net/) (Static Analysis Results Interchange Format) output.**
 
-`qlty-report` turns a Qlty SARIF file into a single self-contained, interactive
-HTML report (tabs for severity/areas/rules/files/findings, plus optional
-security and remediation-plan views). It is a *pure, deterministic* generator:
-**the same SARIF always produces the same report, byte for byte.** The only
-things that change between projects are **configuration files**, never code — so
-one tool serves a Java backend and a TypeScript frontend without modification.
+`sarif-report` turns a standard SARIF file into a single self-contained,
+interactive HTML report (tabs for severity/areas/rules/files/findings, plus
+optional security and remediation-plan views). It is a *pure, deterministic*
+generator: **the same SARIF always produces the same report, byte for byte.**
+The only things that change between projects are **configuration files**, never
+code — so one tool serves a Java backend and a TypeScript frontend without
+modification.
+
+SARIF is a tool-agnostic standard, so `sarif-report` works with **any tool that
+emits SARIF** — ESLint, Checkstyle, Bandit, CodeQL, Semgrep, Trivy, and many
+others. [Qlty](https://qlty.sh) is just one example of a SARIF producer: it can
+aggregate several linters into a single SARIF file, which is a convenient input,
+but it is in no way required.
 
 ## Quick start (no install, via `uvx`)
 
 ```bash
-uvx --from git+https://github.com/andresjz/qlty-report qlty-report \
+uvx --from git+https://github.com/andresjz/sarif-report sarif-report \
   --sarif qlty.sarif \
   --config report.config.json \
   --catalog rules-catalog.json \
   --out qlty-report.html
 ```
 
+Any SARIF file works as `--sarif` input. Here the input is named `qlty.sarif`
+because it was produced by Qlty, and the output is named `qlty-report.html`, but
+both names are arbitrary — use whatever fits your pipeline.
+
 Or run it as a module from a clone:
 
 ```bash
-python -m qlty_report --sarif qlty.sarif --out qlty-report.html
+python -m sarif_report --sarif results.sarif --out report.html
 ```
 
 ### CLI flags
 
 | Flag | Required | Default | Purpose |
 |------|----------|---------|---------|
-| `--sarif PATH`     | yes | — | Qlty SARIF input file. |
+| `--sarif PATH`     | yes | — | SARIF input file (from any SARIF-emitting tool). |
 | `--config PATH`    | no  | — | Project report config (title, areas, waves). |
 | `--catalog PATH`   | no  | — | Curated Spanish rule descriptions. |
-| `--out PATH`       | no  | `qlty-report.html` | Output HTML file. |
+| `--out PATH`       | no  | `report.html` | Output HTML file. |
 | `--emit-data PATH` | no  | — | Also dump the computed `D` object as JSON (debug / determinism checks). |
 | `--version`        | no  | — | Print version and exit. |
 
@@ -148,8 +159,8 @@ Top-level keys: `meta`, `sev`, `areas`, `tools`, `rules`, `files`, `msgs`,
 Running the generator twice on the same inputs yields identical output:
 
 ```bash
-qlty-report --sarif s.sarif --emit-data d1.json --out r1.html
-qlty-report --sarif s.sarif --emit-data d2.json --out r2.html
+sarif-report --sarif s.sarif --emit-data d1.json --out r1.html
+sarif-report --sarif s.sarif --emit-data d2.json --out r2.html
 diff d1.json d2.json && diff r1.html r2.html   # both empty
 ```
 

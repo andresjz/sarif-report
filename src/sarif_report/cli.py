@@ -28,15 +28,15 @@ def _load_json(path: Optional[str], what: str) -> Optional[Dict[str, Any]]:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="qlty-report",
-        description="Deterministic HTML quality report generator from Qlty SARIF output.",
+        prog="sarif-report",
+        description="Deterministic HTML report generator from SARIF (Static Analysis Results Interchange Format) output.",
     )
-    parser.add_argument("--sarif", required=True, help="Path to the Qlty SARIF file (required).")
+    parser.add_argument("--sarif", required=True, help="Path to the SARIF input file (required).")
     parser.add_argument("--config", help="Path to the project report config JSON.")
     parser.add_argument("--catalog", help="Path to the curated rules catalog JSON.")
-    parser.add_argument("--out", default="qlty-report.html", help="Output HTML path (default: qlty-report.html).")
+    parser.add_argument("--out", default="report.html", help="Output HTML path (default: report.html).")
     parser.add_argument("--emit-data", dest="emit_data", help="Also write the D object as JSON to this path.")
-    parser.add_argument("--version", action="version", version=f"qlty-report {__version__}")
+    parser.add_argument("--version", action="version", version=f"sarif-report {__version__}")
     return parser
 
 

@@ -7,7 +7,7 @@ to the same D, field for field.
 import json
 from pathlib import Path
 
-from qlty_report.aggregate import aggregate
+from sarif_report.aggregate import aggregate
 
 FIX = Path(__file__).parent / "fixtures"
 ROOT = Path(__file__).parent.parent

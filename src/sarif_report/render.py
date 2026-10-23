@@ -1,10 +1,10 @@
 """D + template -> HTML string.
 
 The template is a static HTML file with three text placeholders:
-  * ``__QLTY_REPORT_DATA__``  -> the D object serialized as JSON
-  * ``__QLTY_REPORT_TITLE__`` -> document title
-  * ``__QLTY_REPORT_BRAND__`` -> header brand text
-  * ``__QLTY_REPORT_SRC__``   -> source label shown next to the brand
+  * ``__SARIF_REPORT_DATA__``  -> the D object serialized as JSON
+  * ``__SARIF_REPORT_TITLE__`` -> document title
+  * ``__SARIF_REPORT_BRAND__`` -> header brand text
+  * ``__SARIF_REPORT_SRC__``   -> source label shown next to the brand
 
 Serialization is deterministic: ``json.dumps`` with ``sort_keys=False`` (D is
 already built in a stable key order), ``ensure_ascii=False`` and compact
@@ -20,10 +20,10 @@ from typing import Any, Dict, Optional
 
 _TEMPLATE_PATH = Path(__file__).with_name("template.html")
 
-_DATA_TOKEN = "__QLTY_REPORT_DATA__"
-_TITLE_TOKEN = "__QLTY_REPORT_TITLE__"
-_BRAND_TOKEN = "__QLTY_REPORT_BRAND__"
-_SRC_TOKEN = "__QLTY_REPORT_SRC__"
+_DATA_TOKEN = "__SARIF_REPORT_DATA__"
+_TITLE_TOKEN = "__SARIF_REPORT_TITLE__"
+_BRAND_TOKEN = "__SARIF_REPORT_BRAND__"
+_SRC_TOKEN = "__SARIF_REPORT_SRC__"
 
 
 def load_template() -> str:

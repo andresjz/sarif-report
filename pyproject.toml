@@ -3,14 +3,14 @@ requires = ["hatchling>=1.18"]
 build-backend = "hatchling.build"
 
 [project]
-name = "qlty-report"
+name = "sarif-report"
 version = "0.1.0"
-description = "Deterministic HTML quality report generator from Qlty SARIF output"
+description = "Deterministic HTML report generator from SARIF (Static Analysis Results Interchange Format) output"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
 authors = [{ name = "andresjz" }]
-keywords = ["sarif", "qlty", "static-analysis", "report", "html"]
+keywords = ["sarif", "static-analysis", "report", "html", "qlty"]
 classifiers = [
   "Programming Language :: Python :: 3",
   "License :: OSI Approved :: MIT License",
@@ -20,23 +20,23 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/andresjz/qlty-report"
-Repository = "https://github.com/andresjz/qlty-report"
+Homepage = "https://github.com/andresjz/sarif-report"
+Repository = "https://github.com/andresjz/sarif-report"
 
 [project.scripts]
-qlty-report = "qlty_report.cli:main"
+sarif-report = "sarif_report.cli:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=7"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/qlty_report"]
+packages = ["src/sarif_report"]
 
 [tool.hatch.build.targets.wheel.force-include]
-"src/qlty_report/template.html" = "qlty_report/template.html"
+"src/sarif_report/template.html" = "sarif_report/template.html"
 
 [tool.hatch.build.targets.sdist]
-include = ["src/qlty_report", "README.md", "LICENSE"]
+include = ["src/sarif_report", "README.md", "LICENSE"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
